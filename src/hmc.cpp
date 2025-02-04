@@ -12,11 +12,12 @@ void GaugeConf::Compute_Plaquette01() {
 }
 
 void GaugeConf::Force(const std::vector<std::vector<std::complex<double>>>& U) {
+    StapleHMC(U); //Computes staples
 	for (int x = 0; x < Ns; x++) {
 		for (int t = 0; t < Nt; t++) {
 			int i = Coords[x][t];
 			for (int mu = 0; mu < 2; mu++) {
-				Forces[i][mu] = -beta * std::imag(U[Coords[x][t]][mu] * std::conj(StapleHMC(U, x, t, mu)));
+				Forces[i][mu] = -beta * std::imag(U[i][mu] * std::conj(staples[i][mu]));
 			}
 		}
 	}

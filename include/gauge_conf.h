@@ -73,6 +73,7 @@ public:
 	GaugeConf(const int& Nspace, const int& Ntime) : Ns(Nspace), Nt(Ntime), Ntot(Nspace*Ntime) {
 		Conf = std::vector<std::vector<std::complex<double>>>(Ntot, std::vector<std::complex<double>>(2, 0)); //Gauge configuration
 		Conf_copy = std::vector<std::vector<std::complex<double>>>(Ntot, std::vector<std::complex<double>>(2, 0)); //Gauge configuration copy
+		staples = std::vector<std::vector<std::complex<double>>>(Ntot, std::vector<std::complex<double>>(2, 0)); //staples
 		Coords = std::vector<std::vector<int>>(Ns, std::vector<int>(Nt, 0));
 		Plaquette01 = std::vector<std::complex<double>> (Ntot,0);
 		Plaquette01_prime = std::vector<std::complex<double>>(Ntot, 0);
@@ -108,6 +109,7 @@ private:
 	int Ns, Nt, Ntot;
 	std::vector<std::vector<double>> PConf;//Momenta PI
 	std::vector<std::vector<std::complex<double>>> Conf; //Gauge Conf
+	std::vector<std::vector<std::complex<double>>> staples; //Staple
 	std::vector<std::vector<int>> Coords;
 	double beta;
 	double Ep, dEp;
@@ -119,7 +121,7 @@ private:
 	std::vector<std::vector<double>> Forces; //Vector with forces
 	//Defined on gauge_conf.cpp
 	std::complex<double> Staple(const int& x, const int& t, const int& mu);
-	std::complex<double> StapleHMC(const std::vector<std::vector<std::complex<double>>>& U, const int& x, const int& t, const int& mu);
+	void StapleHMC(const std::vector<std::vector<std::complex<double>>>& U);
 
 	//Defined on metropolis.cpp
 	double DeltaS(const std::complex<double>& U_prime, const std::complex<double>& U, const std::complex<double>& Sigma); //For Metropolis
