@@ -1,0 +1,8 @@
+*.txt
+*.dat
+*.ipynb
+SMTest
+out
+.vs
+.ipynb_checkpoints
+build
